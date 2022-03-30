@@ -1,0 +1,83 @@
+<!doctype html> #definere at dokumenttypen er html - en html skabelon 
+<html>
+
+<head> #usynlig skabelon 
+    <title>Den Grønne Hub</title> #Faneblad navngivning 
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"> #koder styling sammen med html og css. 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <style> 
+		body {
+			text-align: center; #sætter tekst på side i midten 
+		}
+
+		#g1, #elementer 
+		#g2, 
+		#g3,
+		#g4{
+			width: 200px; 
+			height: 160px;
+			display: inline-block; 
+			margin: 1em;
+		}
+
+    </style>
+</head>
+
+<body>
+	<h1>Den Grønne Hub </h1> #overskrift/header på hjemmesiden 
+    <div id="g1"></div> #de fire ID'er, som er unikke så de kan styles forskelligt 
+    <div id="g2"></div>
+	<div id="g3"></div>
+	<div id="g4"></div>
+    <hr>
+	<h3> Sidste aflæsning: {{ time }} ==> <a href="/"class="button">REFRESH</a></h3> #tekst på hjemmesiden  
+	<hr>
+    
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script> #downloader funktionaliteten af speedometer hver gang, i stedet for at have det lokalt
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"></script>
+    <script>
+		var g1, g2, g3, g4; #var = variabelt element 
+		document.addEventListener("DOMContentLoaded", function(event) {
+			g1 = new JustGage({
+				id: "g1",
+				value: {{temp}},
+				valueFontColor: "yellow",
+				min: -10,
+				max: 50,
+				title: "Temperature", #ses ikke på hjemmesiden
+				label: "Celcius" #ses på hjemmesiden
+			});
+
+			g2 = new JustGage({
+				id: "g2",
+				value: {{hum}},
+				valueFontColor: "yellow",
+				min: 0,
+				max: 100,
+				title: "Humidity",
+				label: "Fugtighed %"
+			});
+			g3 = new JustGage({
+				id: "g3",
+				value: {{vand}},
+				valueFontColor: "yellow",
+				min: 0,
+				max: 12,
+				title: "Vandstand",
+				label: "Vandstand"
+			});
+			g4 = new JustGage({
+				id: "g4",
+				value: {{lys}},
+				valueFontColor: "yellow",
+				min: 0,
+				max: 4000,
+				title: "Lys",
+				label: "Lys"
+			});
+
+		});
+    </script>
+</body>
+
+</html> 
